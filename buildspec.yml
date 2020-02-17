@@ -16,11 +16,15 @@ phases:
     commands:
     - echo Build started on `date`
     - echo installing composer..
+    - echo enter to project folder
+    - cd etc
     - composer install
     - echo creating .env file..
     - cp .env.$ENV .env
     - echo generating app key
     - php artisan key:generate
+    - echo return to root
+    - cd ..
     - echo Building the Docker image...
     - echo $REPOSITORY_URI
     - docker build -t $REPOSITORY_URI:latest .
