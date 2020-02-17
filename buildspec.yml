@@ -26,9 +26,9 @@ phases:
     - echo Building the Docker image...
     - echo $REPOSITORY_URI
     - echo Building the Docker image...
-    - docker-compose build -t $REPOSITORY_URI:latest .
+    - docker-compose build 2>&1
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker-compose push $REPOSITORY_URI:$IMAGE_TAG
+      - docker-compose push 2>&1
