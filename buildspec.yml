@@ -10,28 +10,25 @@ phases:
     - aws --version
     # login to Elastic container registry
     - eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')
-    - REPOSITORY_URI=448143408942.dkr.ecr.us-east-1.amazonaws.com/lagc-docker-test
+    - REPOSITORY_URI=448143408942.dkr.ecr.us-east-1.amazonaws.com/lagc-backend-dev
     - IMAGE_TAG=lagc-$ENV
   build:
     commands:
     - echo Build started on `date`
     - echo installing composer..
     - echo enter to project folder
-    - cd lagc
     - composer install
     - echo creating .env file..
     - cp .env.$ENV .env
     - echo generating app key
     - php artisan key:generate
     - echo return to root
-    - cd ..
     - echo Building the Docker image...
     - echo $REPOSITORY_URI
-    - docker build -t $REPOSITORY_URI:latest .
-    - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+    - echo Building the Docker image...
+    - docker-compose build -t $REPOSITORY_URI:latest .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker image ls -a
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker-compose push $REPOSITORY_URI:$IMAGE_TAG
