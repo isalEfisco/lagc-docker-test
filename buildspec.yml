@@ -10,7 +10,7 @@ phases:
     - aws --version
     # login to Elastic container registry
     - eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')
-    - REPOSITORY_URI=448143408942.dkr.ecr.us-east-1.amazonaws.com/lagc-docker-test
+    - REPOSITORY_URI=448143408942.dkr.ecr.us-east-1.amazonaws.com/lagc-backend-dev
     - IMAGE_TAG=lagc-$ENV
   build:
     commands:
