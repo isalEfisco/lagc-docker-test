@@ -1,6 +1,5 @@
 <?php
-echo('ok');
-die();
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
